@@ -5,12 +5,13 @@ import 'package:mooviee/data/web_sevices/characters-web_serivces.dart';
 class CharacterRepo{
   final CharacterWebServices characterWebServices ;
 
-  CharacterRepo({required this.characterWebServices});
+  CharacterRepo(this.characterWebServices);
 
-  Future<List> getAllCharacter() async{
+
+  Future<List<Character>> getAllCharacter() async{
     final characters = await characterWebServices.getAllCharacter();
     // ignore: avoid_types_as_parameter_names
-    return characters.map((character) => character.fromJasn(character)).toList();
+    return characters.map((character) => Character.fromJson(character)).toList();
   }
 
 }

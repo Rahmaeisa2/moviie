@@ -6,12 +6,15 @@ import 'package:mooviee/data/web_sevices/characters-web_serivces.dart';
 import 'package:mooviee/presentation/screens/characters_details.dart';
 import 'package:mooviee/presentation/screens/characters_screen.dart';
 
+import 'data/models/characters.dart';
+
 class AppRoute {
   late CharacterRepo characterRepo; 
   late CharactersCubit charactersCubit ;  
 
   AppRoute(){
-    characterRepo = CharacterRepo(characterWebServices: CharacterWebServices());
+    //create new one
+    characterRepo = CharacterRepo(CharacterWebServices());
     charactersCubit = CharactersCubit(characterRepo);
 
 
@@ -25,7 +28,8 @@ class AppRoute {
       
       ) );
       case '/characters_Details':
-      return MaterialPageRoute(builder: (_)=> const characterDetailsScreen());
+        final character = settings.arguments as Character;
+      return MaterialPageRoute(builder: (_)=> characterDetailsScreen(character: character,));
     }
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mooviee/constants/myColors.dart';
 import 'package:mooviee/data/models/characters.dart';
 
+import '../../constants/string.dart';
+
 class CharacterItem extends StatelessWidget {
   final Character character ;
 
@@ -17,37 +19,44 @@ class CharacterItem extends StatelessWidget {
         color:myColors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: GridTile(
-        // ignore: sort_child_properties_last
-        child: Container(
-        color: myColors.grey,
-        child: character.image.isNotEmpty?
-        FadeInImage.assetNetwork(
-          placeholder: '', image: character.image,
-        fit:BoxFit.cover,
-        ):
-        Image.asset(''),
-      ),
-      footer: Container(
-        width: double.infinity,
-        padding:const EdgeInsets.symmetric(horizontal: 15 , vertical: 1 ),
-        color: Colors.black54,
-        alignment: Alignment.bottomCenter,
-        // ignore: unnecessary_string_interpolations
-        child: Text(
-          '${character.name}',
-          style: const TextStyle(
-            height: 1.3,
-            fontSize: 16,
-            color: myColors.white,
-            fontWeight: FontWeight.bold,
+      //اقدر اعمل تاب عليها
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(context, charactersDetails , arguments: character),
+        child: GridTile(
+          // ignore: sort_child_properties_last
+          child: Hero(
+            tag: character.charID,
+            child: Container(
+            color: myColors.grey,
+            child: character.image.isNotEmpty?
+            FadeInImage.assetNetwork(
+              placeholder: "assets/images/loading.gif", image: character.image,
+            fit:BoxFit.cover,
+            ):
+            Image.asset(''),
+                    ),
           ),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-          textAlign: TextAlign.center,
-
+        footer: Container(
+          width: double.infinity,
+          padding:const EdgeInsets.symmetric(horizontal: 15 , vertical: 1 ),
+          color: Colors.black54,
+          alignment: Alignment.bottomCenter,
+          // ignore: unnecessary_string_interpolations
+          child: Text(
+            '${character.name}',
+            style: const TextStyle(
+              height: 1.3,
+              fontSize: 16,
+              color: myColors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+        
+          ),
         ),
-      ),
+        ),
       ),
       
     

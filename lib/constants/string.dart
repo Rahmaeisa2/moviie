@@ -1,3 +1,3 @@
-const BaseUrl = 'https://rickandmortyapi.com/api';
+String baseUrl ="https://rickandmortyapi.com/";
 const charactersScreen = '/';
 const charactersDetails = '/characters_Details';
